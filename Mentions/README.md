@@ -8,7 +8,7 @@
 
 ### Mentions
 
-![Mentions](src/assets/mentions.png)
+![Mentions](src/assets/mention.png)
 
 # React + TypeScript + Vite
 
