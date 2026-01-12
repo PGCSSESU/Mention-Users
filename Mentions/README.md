@@ -1,3 +1,15 @@
+## Getting Started
+
+## 📸 Screenshots
+
+### Home Page
+
+![Home Page](src/assets/home.png)
+
+### Mentions
+
+![Mentions](src/assets/mentions.png)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
