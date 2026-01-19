@@ -1,4 +1,4 @@
-import type { User, Mention } from "../../types/mention";
+import type { User, Mention } from "../types/mention";
 
 export function extractMentions(
   text: string,

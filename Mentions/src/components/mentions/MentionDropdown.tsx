@@ -1,17 +1,37 @@
 import { Command } from "cmdk";
 import type { User } from "../../types/mention";
+import { useEffect, useRef } from "react";
 
 interface Props {
   users: User[];
   onSelect: (user: User) => void;
-  style?: React.CSSProperties;
+  query: string;
+  autoFocus: boolean;
 }
 
-export function MentionDropdown({ users, onSelect }: Props) {
+export function MentionDropdown({
+  users,
+  onSelect,
+  query,
+  autoFocus,
+}: Props) {
+  const commandRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (autoFocus) {
+      commandRef.current?.focus(); 
+    }
+  }, [autoFocus]);
+
   if (!users.length) return null;
 
   return (
-    <Command className="absolute left-0 right-0 mt-1 bg-white border rounded-md shadow z-10">
+    <Command
+      ref={commandRef}
+      tabIndex={-1}
+      key={query}
+      className="absolute left-0 right-0 mt-1 bg-white border rounded-md shadow z-10"
+    >
       <Command.List className="max-h-48 overflow-y-auto">
         {users.map(u => (
           <Command.Item

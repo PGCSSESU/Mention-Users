@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import type { User } from "../../types/mention";
 import { HoverCard } from "../hovercard/HoverCard";
-import { UserCard } from "./UserCard";
+import { UserCard } from "../hovercard/UserCard";
 
 interface MentionTextProps {
   user: User;
@@ -16,12 +17,16 @@ export function MentionText({
   return (
     <HoverCard
       trigger={
-        <span
+        <Link
+          to={`/users/${user.username}`}
           className={`text-green-700 font-semibold cursor-pointer ${className}`}
+          onClick={e => {
+            e.stopPropagation();
+          }}
         >
           {prefix}
           {user.username}
-        </span>
+        </Link>
       }
       content={<UserCard user={user} />}
       openDelay={200}

@@ -1,23 +1,32 @@
 import type { User } from "../../types/mention";
-import { extractMentions } from "./extractMentions";
+import { extractMentions } from "../../hooks/extractMentions";
 import { MentionText } from "./MentionText";
 
 interface Props {
   text: string;
-  users: User[];
+  mentionedUsers: Record<string, User>;
 }
 
-export function MentionPreview({ text, users }: Props) {
+export function MentionPreview({ text, mentionedUsers }: Props) {
+  const users = Object.values(mentionedUsers);
   const mentions = extractMentions(text, users);
+
   const nodes: React.ReactNode[] = [];
   let cursor = 0;
 
-  mentions.forEach((m, i) => {
+  mentions.forEach((m) => {
     nodes.push(text.slice(cursor, m.start));
 
-    const user = users.find(u => u.id === m.id);
+    const user = mentionedUsers[m.username];
     if (user) {
-      nodes.push(<MentionText key={i} user={user} />);
+      nodes.push(
+        <MentionText
+          key={`${m.username}-${m.start}`}
+          user={user}
+        />
+      );
+    } else {
+      nodes.push(text.slice(m.start, m.end));
     }
 
     cursor = m.end;
