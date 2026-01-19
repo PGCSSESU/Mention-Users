@@ -1,6 +1,6 @@
-import type { User } from "../types/mention";
+import type { User } from "../../types/mention";
 
-export function UserHoverCard({ user }: { user: User }) {
+export function UserCard({ user }: { user: User }) {
   return (
     <div className="absolute top-full left-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-50 p-3">
       <div className="flex gap-3 items-center">
